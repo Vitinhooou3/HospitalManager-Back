@@ -26,7 +26,7 @@ public class PacienteController {
         return pacienteRepository.findAll();
     }
 
-    
+    //Faz um put no banco 
     @PostMapping("/pacientes")
     public Paciente createPaciente(@RequestBody Paciente paciente){
         return pacienteRepository.save(paciente);
