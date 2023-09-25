@@ -58,5 +58,9 @@ public class Leito {
         this.medico = medico;
     }
 
+    public boolean getDisponivel() {
+        return false;
+    }
+
 
 }
