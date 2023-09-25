@@ -6,9 +6,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name="Pacientes")
+@Component
 public class Paciente {
     
     @Id
@@ -21,22 +23,25 @@ public class Paciente {
     @Column(name="idade")
     private int idade;
 
-    @Column(name="Cpf")
+    @Column(name="cpf",unique = true)
     private String cpf;
 
-    @Column(name = "Convênio")
+    @Column(name = "convenio")
     private boolean convenio;
 
+    @Column(name = "sexo")
+    private String sexo;
     public Paciente(){
 
     }
 
-    public Paciente(String nome, int idade, String cpf, boolean convenio){
+    public Paciente(String nome, int idade, String cpf, boolean convenio, String sexo){
         super();
         this.nome = nome;
         this.idade = idade;
         this.cpf = cpf;
         this.convenio = convenio;
+        this.sexo = sexo;
 
     }
 
@@ -80,7 +85,10 @@ public class Paciente {
         this.convenio = convenio;
     }
 
-    
-    
-
+    public void setSexo(String sexo){
+        this.sexo = sexo;
+    }
+    public void getSexo(String sexo){
+        this.sexo = sexo;
+    }
 }

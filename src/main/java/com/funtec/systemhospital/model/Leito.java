@@ -1,14 +1,8 @@
 package com.funtec.systemhospital.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 @Entity
-
 public class Leito {
 
 
@@ -20,10 +14,13 @@ public class Leito {
     private boolean disponivel;
 
   
-    @OneToOne
+    @OneToOne(targetEntity = Paciente.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id")
     private Paciente paciente;
 
-    @ManyToOne
+
+    @ManyToOne(targetEntity = Medico.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id")
     private Medico medico;
 
     public Long getId() {
@@ -57,6 +54,7 @@ public class Leito {
     public void setMedico(Medico medico) {
         this.medico = medico;
     }
+
 
     public boolean getDisponivel() {
         return false;

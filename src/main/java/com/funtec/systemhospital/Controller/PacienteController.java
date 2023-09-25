@@ -12,10 +12,12 @@ import com.funtec.systemhospital.model.Paciente;
 import com.funtec.systemhospital.repository.PacienteRepository;
 
 
-
 @RestController
 @RequestMapping("api/paciente")
 public class PacienteController {
+
+    @Autowired
+    private Paciente paciente;
     @Autowired
     private PacienteRepository pacienteRepository;
 
@@ -31,7 +33,6 @@ public class PacienteController {
     public Paciente createPaciente(@RequestBody Paciente paciente){
         return pacienteRepository.save(paciente);
     }
-
 
 
 
