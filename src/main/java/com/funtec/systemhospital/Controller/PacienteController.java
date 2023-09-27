@@ -33,6 +33,4 @@ public class PacienteController {
         }
     }
 
-    // Adicione manipuladores de exceções aqui, se necessário
-
 }

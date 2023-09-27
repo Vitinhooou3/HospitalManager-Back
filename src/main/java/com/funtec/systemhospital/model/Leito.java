@@ -1,9 +1,6 @@
 package com.funtec.systemhospital.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "leito")
@@ -17,13 +14,21 @@ public class Leito {
 
     // Chaves estrangeiras
 
-    @OneToOne
-    @JoinColumn(name = "id_paciente", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_id_paciente", referencedColumnName = "id",unique = true)
     private Paciente paciente;
 
-    @OneToOne
-    @JoinColumn(name = "id_medico", referencedColumnName = "id")
+    @Column(name = "fk_id_paciente", insertable = false, updatable = false)
+    private Long id_paciente;
+
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_id_medico", referencedColumnName = "id", unique = true)
     private Medico medico;
+
+    @Column(name = "fk_id_medico", insertable = false, updatable = false)
+    private Long id_Medico;
+
 
     // Construtor vazio necessário para JPA
     public Leito() {
@@ -37,11 +42,11 @@ public class Leito {
     }
 
     // Métodos Getters and Setters
-    public Long getId_leito() {
+    public Long getId() {
         return id;
     }
 
-    public void setId_leito(Long id_leito) {
+    public void setId(Long id_leito) {
         this.id = id_leito;
     }
 
@@ -68,4 +73,21 @@ public class Leito {
     public void setMedico(Medico medico) {
         this.medico = medico;
     }
+
+    public Long getId_paciente() {
+        return id_paciente;
+    }
+
+    public void setId_paciente(Long id_paciente) {
+        this.id_paciente = id_paciente;
+    }
+
+    public Long getId_Medico() {
+        return id_Medico;
+    }
+
+    public void setId_Medico(Long id_Medico) {
+        this.id_Medico = id_Medico;
+    }
+    
 }

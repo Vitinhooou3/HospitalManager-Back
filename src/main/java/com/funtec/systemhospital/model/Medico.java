@@ -1,8 +1,5 @@
 package com.funtec.systemhospital.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -34,11 +31,11 @@ public class Medico {
     }
 
     // Métodos Getters and Setters
-    public Long getId_medico() {
+    public Long getId() {
         return id;
     }
 
-    public void setId_medico(Long id_medico) {
+    public void setId(Long id_medico) {
         this.id = id_medico;
     }
 
@@ -56,5 +53,13 @@ public class Medico {
 
     public void setEspecialidade(String especialidade) {
         this.especialidade = especialidade;
+    }
+
+    public Leito getLeito() {
+        return leito;
+    }
+
+    public void setLeito(Leito leito) {
+        this.leito = leito;
     }
 }

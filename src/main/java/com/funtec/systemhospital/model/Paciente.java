@@ -45,11 +45,11 @@ public class Paciente {
     }
 
     // Métodos Getters and Setters
-    public Long getId_paciente() {
+    public Long getId() {
         return id;
     }
 
-    public void setId_paciente(Long id_paciente) {
+    public void setId(Long id_paciente) {
         this.id = id_paciente;
     }
 
