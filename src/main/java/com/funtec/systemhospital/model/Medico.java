@@ -3,48 +3,43 @@ package com.funtec.systemhospital.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name="Medico")
+@Table(name = "Medico")
 public class Medico {
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Use GenerationType.IDENTITY para autoincremento em Postgres
     private Long id;
 
-    @Column(name="nome")
+    @Column(name = "nome")
     private String nome;
 
-    @OneToMany(mappedBy = "medico")
-    private List<Leito> leitos = new ArrayList<Leito>();
+    @OneToOne(mappedBy = "medico", cascade = CascadeType.ALL)
+    @JoinColumn(name = "medico_id")
+    private Leito leito;
 
-    @Column(name="Especialidade")
+    @Column(name = "especialidade")
     private String especialidade;
 
-
-    public Medico(){
-
+    // Construtor vazio necessário para JPA
+    public Medico() {
     }
 
-    public Medico(int id, String nome, String especialidade){
-        super();
+    // Construtor com parâmetros
+    public Medico(String nome, String especialidade) {
         this.nome = nome;
         this.especialidade = especialidade;
     }
 
-    public Long getId() {
+    // Métodos Getters and Setters
+    public Long getId_medico() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_medico(Long id_medico) {
+        this.id = id_medico;
     }
 
     public String getNome() {
@@ -62,6 +57,4 @@ public class Medico {
     public void setEspecialidade(String especialidade) {
         this.especialidade = especialidade;
     }
-
-    
 }

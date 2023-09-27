@@ -1,4 +1,4 @@
-package com.funtec.systemhospital.model.form;
+package com.funtec.systemhospital.form;
 
 
 import jakarta.validation.constraints.NotEmpty;

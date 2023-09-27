@@ -1,29 +1,24 @@
 package com.funtec.systemhospital.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import org.springframework.stereotype.Component;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name="Pacientes")
-@Component
+@Table(name = "Pacientes")
 public class Paciente {
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Use GenerationType.IDENTITY para autoincremento em Postgres
     private Long id;
 
-    @Column(name="nome")
+    @Column(name = "nome")
     private String nome;
 
-    @Column(name="idade")
+    @Column(name = "idade")
     private int idade;
 
-    @Column(name="cpf",unique = true)
+    @Column(name = "cpf", unique = true)
+    @NotNull
     private String cpf;
 
     @Column(name = "convenio")
@@ -31,26 +26,31 @@ public class Paciente {
 
     @Column(name = "sexo")
     private String sexo;
-    public Paciente(){
 
+    @OneToOne(mappedBy = "paciente", cascade = CascadeType.ALL)
+    @JoinColumn(name = "paciente_id")
+    private Leito leito;
+
+    // Construtor vazio necessário para JPA
+    public Paciente() {
     }
 
-    public Paciente(String nome, int idade, String cpf, boolean convenio, String sexo){
-        super();
+    // Construtor com parâmetros
+    public Paciente(String nome, int idade, String cpf, boolean convenio, String sexo) {
         this.nome = nome;
         this.idade = idade;
         this.cpf = cpf;
         this.convenio = convenio;
         this.sexo = sexo;
-
     }
 
-    public long getId() {
+    // Métodos Getters and Setters
+    public Long getId_paciente() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_paciente(Long id_paciente) {
+        this.id = id_paciente;
     }
 
     public String getNome() {
@@ -85,10 +85,11 @@ public class Paciente {
         this.convenio = convenio;
     }
 
-    public void setSexo(String sexo){
-        this.sexo = sexo;
+    public String getSexo() {
+        return sexo;
     }
-    public void getSexo(String sexo){
+
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 }

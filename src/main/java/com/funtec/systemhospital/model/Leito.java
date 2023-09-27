@@ -1,34 +1,48 @@
 package com.funtec.systemhospital.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Table(name = "leito")
 public class Leito {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Usar GenerationType.IDENTITY para autoincremento em Postgres
     private Long id;
-
 
     private boolean disponivel;
 
-  
-    @OneToOne(targetEntity = Paciente.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
+    // Chaves estrangeiras
+
+    @OneToOne
+    @JoinColumn(name = "id_paciente", referencedColumnName = "id")
     private Paciente paciente;
 
-
-    @ManyToOne(targetEntity = Medico.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
+    @OneToOne
+    @JoinColumn(name = "id_medico", referencedColumnName = "id")
     private Medico medico;
 
-    public Long getId() {
+    // Construtor vazio necessário para JPA
+    public Leito() {
+    }
+
+    // Construtor com parâmetros
+    public Leito(boolean disponivel, Paciente paciente, Medico medico) {
+        this.disponivel = disponivel;
+        this.paciente = paciente;
+        this.medico = medico;
+    }
+
+    // Métodos Getters and Setters
+    public Long getId_leito() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_leito(Long id_leito) {
+        this.id = id_leito;
     }
 
     public boolean isDisponivel() {
@@ -54,11 +68,4 @@ public class Leito {
     public void setMedico(Medico medico) {
         this.medico = medico;
     }
-
-
-    public boolean getDisponivel() {
-        return false;
-    }
-
-
 }
