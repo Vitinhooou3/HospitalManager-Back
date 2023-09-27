@@ -1,39 +1,38 @@
 package com.funtec.systemhospital.Controller;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import com.funtec.systemhospital.model.Paciente;
 import com.funtec.systemhospital.repository.PacienteRepository;
 
-
-
 @RestController
-@RequestMapping("api/paciente")
+@RequestMapping("/pacientes")
 public class PacienteController {
+
     @Autowired
     private PacienteRepository pacienteRepository;
 
-
-    //Retorna lista de pacientes no banco
-    @GetMapping("/pacientes")
-    public List<Paciente> getAllPaciente(){
+    // Retorna lista de pacientes
+    @GetMapping()
+    public List<Paciente> getAllPaciente() {
         return pacienteRepository.findAll();
     }
 
-    //Faz um post no banco 
-    @PostMapping("/pacientes")
-    public Paciente createPaciente(@RequestBody Paciente paciente){
-        return pacienteRepository.save(paciente);
+    // Cria um novo paciente
+    @PostMapping("/post")
+    public ResponseEntity<Paciente> createPaciente(@RequestBody Paciente paciente) {
+        try {
+            Paciente newPaciente = pacienteRepository.save(paciente);
+            return new ResponseEntity<>(newPaciente, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-
-
-
+    // Adicione manipuladores de exceções aqui, se necessário
 
 }

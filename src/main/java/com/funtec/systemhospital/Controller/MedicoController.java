@@ -3,31 +3,36 @@ package com.funtec.systemhospital.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import com.funtec.systemhospital.model.Medico;
 import com.funtec.systemhospital.repository.MedicoRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @RestController
-@RequestMapping("/medico")
+@RequestMapping("/medicos")
 public class MedicoController {
 
     @Autowired
     private MedicoRepository medicoRepository;
 
-    @GetMapping("/medicos")
-    public List<Medico> getAllMedico(){
+    // Retorna lista de médicos
+    @GetMapping()
+    public List<Medico> getAllMedico() {
         return medicoRepository.findAll();
     }
 
-    @PostMapping("/medicos")
-    public Medico createMedico(@RequestBody Medico medico){
-        return medicoRepository.save(medico);
+    // Cria um novo médico
+    @PostMapping("/post")
+    public ResponseEntity<Medico> createMedico(@RequestBody Medico medico) {
+        try {
+            Medico newMedico = medicoRepository.save(medico);
+            return new ResponseEntity<>(newMedico, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-
 
 }
