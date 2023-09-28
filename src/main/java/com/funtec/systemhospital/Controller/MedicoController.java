@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import com.funtec.systemhospital.model.Medico;
 import com.funtec.systemhospital.repository.MedicoRepository;
 
-import jakarta.persistence.EntityNotFoundException;
-
 @RestController
 @RequestMapping("/medicos")
 public class MedicoController {
