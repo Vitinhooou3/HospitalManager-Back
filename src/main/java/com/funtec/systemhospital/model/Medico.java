@@ -3,7 +3,7 @@ package com.funtec.systemhospital.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Medico")
+@Table(name = "medico")
 public class Medico {
 
     @Id
@@ -55,11 +55,4 @@ public class Medico {
         this.especialidade = especialidade;
     }
 
-    public Leito getLeito() {
-        return leito;
-    }
-
-    public void setLeito(Leito leito) {
-        this.leito = leito;
-    }
 }
