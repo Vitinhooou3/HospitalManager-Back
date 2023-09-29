@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/leitos")
+@CrossOrigin("*")
 public class LeitoController {
 
     @Autowired

@@ -11,6 +11,7 @@ import com.funtec.systemhospital.repository.MedicoRepository;
 
 @RestController
 @RequestMapping("/medicos")
+@CrossOrigin("*")
 public class MedicoController {
 
     @Autowired
