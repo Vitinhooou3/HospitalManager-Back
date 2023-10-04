@@ -1,4 +1,4 @@
-insert into pacientes(convênio,cpf,idade,nome)
+insert into paciente(convênio,cpf,idade,nome)
 values
 	(true,'185.519.760-01',25,'Hugo Lucca Nelson Gonçalves'),
 	(false,'913.732.561-25',60,'Marlene Isabel Luna da Costa'),

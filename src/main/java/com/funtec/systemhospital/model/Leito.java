@@ -22,7 +22,7 @@ public class Leito {
     private Long id_paciente;
 
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_id_medico", referencedColumnName = "id", unique = true)
     private Medico medico;
 

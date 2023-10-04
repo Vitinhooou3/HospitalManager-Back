@@ -13,7 +13,7 @@ public class Medico {
     @Column(name = "nome")
     private String nome;
 
-    @OneToOne(mappedBy = "medico", cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "medico_id")
     private Leito leito;
 
