@@ -1,8 +1,13 @@
 package com.funtec.systemhospital.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "medico")
 public class Medico {
 
@@ -14,45 +19,14 @@ public class Medico {
     private String nome;
 
     @ManyToOne()
-    @JoinColumn(name = "medico_id")
+    @JoinColumn(name = "leito_id")
     private Leito leito;
+
+    @Column(name = "fk_id_leito", insertable = false, updatable = false)
+    private Long id_leito;
+
 
     @Column(name = "especialidade")
     private String especialidade;
-
-    // Construtor vazio necessário para JPA
-    public Medico() {
-    }
-
-    // Construtor com parâmetros
-    public Medico(String nome, String especialidade) {
-        this.nome = nome;
-        this.especialidade = especialidade;
-    }
-
-    // Métodos Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id_medico) {
-        this.id = id_medico;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEspecialidade() {
-        return especialidade;
-    }
-
-    public void setEspecialidade(String especialidade) {
-        this.especialidade = especialidade;
-    }
 
 }
